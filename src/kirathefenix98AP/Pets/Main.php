@@ -82,9 +82,14 @@ class Main extends PluginBase
         DataBase::getInstance()->load($this);
 
         $packManager = $this->getServer()->getResourcePackManager();
-        $packManager->setResourceStack(array_merge($packManager->getResourceStack(), [new ZippedResourcePack($this->getDataFolder() . "AnimePets.mcpack")]));
-        ($serverForceResources = new \ReflectionProperty($packManager, "serverForceResources"))->setAccessible(true);
-        $serverForceResources->setValue($packManager, true);
+        $stack = $packManager->getResourceStack();
+        $stack[] = new ZippedResourcePack($this->getDataFolder() . "AnimePets.mcpack");
+        $deduped = [];
+        foreach (array_reverse($stack) as $pack) {
+            $deduped[strtolower($pack->getPackId())] = $pack;
+        }
+        $packManager->setResourceStack(array_reverse(array_values($deduped)));
+        $packManager->setResourcePacksRequired(true);
     }
 
     public static function getInstance(): self

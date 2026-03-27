@@ -9,7 +9,7 @@
 #
 
 # Worlds where they are available
-available-worlds: ["world", "lobby"]
+available-worlds: []
 
 # DataBase configuration (Only SQL)
 database:
