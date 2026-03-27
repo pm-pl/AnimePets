@@ -1,0 +1,9 @@
+name: AnimePets
+api: 5.0.0
+main: kirathefenix98AP\Pets\Main
+version: 2.0.0
+author: Laith98Dev, KIRATHEFENIX98
+
+permissions:
+  animepets.command:
+    default: true
